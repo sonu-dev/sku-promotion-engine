@@ -48,7 +48,7 @@ namespace PromotionEngine.Client
             cartMgr.AddToCart(sku_B, 1);
             cartMgr.AddToCart(sku_C, 1);
             cartMgr.ApplyPromotions();
-            ConsoleHelper.DisplayCart(cartMgr, "Scenario B");
+            ConsoleHelper.DisplayCart(cartMgr, "Scenario A");
 
             /* Scenario B
                         5 * A 130 + 2*50
@@ -60,7 +60,7 @@ namespace PromotionEngine.Client
             cartMgr.AddToCart(sku_A, 5);
             cartMgr.AddToCart(sku_B, 5);
             cartMgr.AddToCart(sku_C, 1);
-            cartMgr.ApplyPromotions();            
+            cartMgr.ApplyPromotions();
             ConsoleHelper.DisplayCart(cartMgr, "Scenario B");
 
             /*Scenario C
@@ -69,8 +69,7 @@ namespace PromotionEngine.Client
                         1 * C -
                         1 * D 3
              */
-            cartMgr.ClearCart();
-            cartMgr.ClearCart();
+            cartMgr.ClearCart();          
             cartMgr.AddToCart(sku_A, 3);
             cartMgr.AddToCart(sku_B, 5);
             cartMgr.AddToCart(sku_C, 1);

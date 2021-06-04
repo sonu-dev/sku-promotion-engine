@@ -16,7 +16,7 @@ namespace PromotionEngine.Promotions
         }
         public void AddPromotionRule(PromotionRule rule)
         {
-            if (_rules.Any(r => r.RuleName == rule.RuleName))
+            if (_rules.Any(r => r.RuleName.Equals(rule.RuleName)))
             {
                 throw new InvalidOperationException($"Promotion Rule: {rule.RuleName} already exist.");
             }
