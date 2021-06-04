@@ -65,10 +65,10 @@ namespace PromotionEngine.Cart
         {
             cartItem.Quantity += quantity;
             cartItem.Price =  cartItem.Quantity * cartItem.Product.UnitPrice;
-            RefereshTotalPrice();
+            RefreshTotalPrice();
         }
 
-        private void RefereshTotalPrice()
+        private void RefreshTotalPrice()
         {
             var totalPrice = 0;
             CartItems.ForEach(item =>
