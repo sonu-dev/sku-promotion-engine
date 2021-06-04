@@ -20,6 +20,7 @@ namespace PromotionEngine.Cart
             _promotionRulesManager = promotionRulesManager;
         }
 
+        #region Public Methods
         public void AddToCart(Product product, int quantity)
         {
             var cartItem = CartItems.FirstOrDefault(cI => product.Name.Equals(cI.Product.Name));
@@ -46,7 +47,7 @@ namespace PromotionEngine.Cart
                 }
                 else
                 {
-                    totalPrice = totalPrice + item.Quantity * item.Product.UnitPrice;
+                    totalPrice = totalPrice + item.Price;
                 }
             });
             TotalPrice = totalPrice;
@@ -57,11 +58,25 @@ namespace PromotionEngine.Cart
             CartItems.Clear();
             TotalPrice = 0;
         }
+        #endregion
 
+        #region Private Methods
         private void UpdateCartItem(CartItem cartItem, int quantity)
         {
             cartItem.Quantity += quantity;
-            cartItem.Price = cartItem.Quantity * cartItem.Product.UnitPrice;
+            cartItem.Price =  cartItem.Quantity * cartItem.Product.UnitPrice;
+            RefereshTotalPrice();
         }
+
+        private void RefereshTotalPrice()
+        {
+            var totalPrice = 0;
+            CartItems.ForEach(item =>
+            {
+                totalPrice = totalPrice + item.Price;
+            });
+            TotalPrice = totalPrice;
+        }
+        #endregion
     }
 }

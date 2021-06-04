@@ -14,9 +14,9 @@ namespace PromotionEngine.Cart
             Quantity = quantity;
             Price = quantity * product.UnitPrice;
         }
-        public Product Product { get; set; }
+        public Product Product { get; private set; }
         public int Quantity { get; set; }
-        public int Price {get;set;}
+        public int Price {get; set;}
         public bool HasAppliedPromotion { get;set;}
     }
 }

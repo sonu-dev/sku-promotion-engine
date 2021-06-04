@@ -50,10 +50,10 @@ namespace PromotionEngine.Client
              */
             // Add Items to Cart
             var cartMgr = new CartManager(promotionRulesManager);
-            cartMgr.AddToCart(sku_A, 1);
+            cartMgr.AddToCart(sku_A, 1);          
             cartMgr.AddToCart(sku_B, 1);
             cartMgr.AddToCart(sku_C, 1);
-            cartMgr.ApplyPromotions();
+            //cartMgr.ApplyPromotions();
             ConsoleHelper.DisplayCart(cartMgr, "Scenario A");
 
             /* Scenario B
