@@ -40,7 +40,7 @@ namespace PromotionEngine.Client
             promotionRulesManager.AddPromotionRule(new FixedPricePromotionRule("CD", new List<PromotionProduct> { new PromotionProduct(C, 1), new PromotionProduct(D, 1) }, 30));
 
             // E for 10%
-            promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("E10%", new List<PromotionProduct> { new PromotionProduct(E, 2) }, 10));
+            promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("2E10%", new List<PromotionProduct> { new PromotionProduct(E, 2) }, 10));
 
             /* Scenario A
                         1 * A 50
