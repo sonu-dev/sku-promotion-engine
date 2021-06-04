@@ -40,12 +40,13 @@ namespace PromotionEngine.Client
             promotionRulesManager.AddPromotionRule(new FixedPricePromotionRule("CD", new List<PromotionProduct> { new PromotionProduct(C, 1), new PromotionProduct(D, 1) }, 30));
 
             // E for 10%
-            promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("E%100", new List<PromotionProduct> { new PromotionProduct(E, 2) }, 10));
+            promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("E10%", new List<PromotionProduct> { new PromotionProduct(E, 2) }, 10));
 
             /* Scenario A
                         1 * A 50
                         1 * B 30
                         1 * C 20
+                        Total:- 100
              */
             // Add Items to Cart
             var cartMgr = new CartManager(promotionRulesManager);
@@ -59,6 +60,7 @@ namespace PromotionEngine.Client
                         5 * A 130 + 2*50
                         5 * B 45 + 45 + 30
                         1 * C 20
+                        Total:- 370
              */
 
             cartMgr.ClearCart();
@@ -73,6 +75,7 @@ namespace PromotionEngine.Client
                         5 * B 45 + 45 + 1 * 30
                         1 * C -
                         1 * D 3
+                        Total:- 280
              */
             cartMgr.ClearCart();          
             cartMgr.AddToCart(sku_A, 3);
@@ -87,10 +90,10 @@ namespace PromotionEngine.Client
                         5 * B 120
                         1 * D 15
                         7 * E 640
+                        Total:- 905
              */
             cartMgr.ClearCart();
-            cartMgr.AddToCart(sku_A, 3);
-            cartMgr.AddToCart(sku_A, 2);
+            cartMgr.AddToCart(sku_A, 3);           
             cartMgr.AddToCart(sku_B, 5);
             cartMgr.AddToCart(sku_D, 1);         
             cartMgr.AddToCart(sku_E, 7);
