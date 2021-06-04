@@ -29,7 +29,7 @@ namespace PromotionEngine.Client
             {
                 
                 Console.WriteLine($"-----------------------");
-                Console.WriteLine($"{item.Unit} | {item.Product.Name} | {item.Price}");
+                Console.WriteLine($"{item.Quantity} | {item.Product.Name} | {item.Price}");
                 Console.WriteLine($" ");
             });           
             Console.WriteLine($"Total Price:{cart.TotalPrice}");

@@ -7,7 +7,7 @@ using System.Text;
 
 namespace PromotionEngine.Promotions
 {
-    public class FixedPricePromotionRule : PromotionRule
+    public class FixedPricePromotionRule : PromotionRuleBase
     {
         private Int32 _fixedPrice;      
         public FixedPricePromotionRule(string ruleName, List<PromotionProduct> promotionProducts, int fixedPrice): base(ruleName, promotionProducts)
@@ -22,10 +22,10 @@ namespace PromotionEngine.Promotions
             {
                 var item = ruleItems.First();
                 var pProduct = PromotionProducts.FirstOrDefault(p => p.ProductName.Equals(item.Product.Name));
-                if (item.Unit >= pProduct.Unit)
+                if (item.Quantity >= pProduct.Quantity)
                 {
-                    var pUnits = item.Unit / pProduct.Unit;
-                    var pRemUnits = item.Unit % pProduct.Unit;
+                    var pUnits = item.Quantity / pProduct.Quantity;
+                    var pRemUnits = item.Quantity % pProduct.Quantity;
                     item.Price = pUnits * _fixedPrice + pRemUnits * item.Product.UnitPrice;
                     item.HasAppliedPromotion = true;
                 }
@@ -38,7 +38,7 @@ namespace PromotionEngine.Promotions
                 foreach(var item in ruleItems)
                 {
                     var pProduct = PromotionProducts.FirstOrDefault(p => p.ProductName.Equals(item.Product.Name));
-                    if(item.Unit >= pProduct.Unit)
+                    if(item.Quantity >= pProduct.Quantity)
                     {
                         rulePassed = true;
                     }

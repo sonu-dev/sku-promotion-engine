@@ -6,12 +6,12 @@ namespace PromotionEngine.Promotions
 {
     public class PromotionProduct
     {
-        public PromotionProduct(string productName, int unit)
+        public PromotionProduct(string productName, int quantity)
         {
             ProductName = productName;
-            Unit = unit;
+            Quantity = quantity;
         }
         public string ProductName {get;set;}
-        public int Unit { get; set; }
+        public int Quantity { get; set; }
     }
 }

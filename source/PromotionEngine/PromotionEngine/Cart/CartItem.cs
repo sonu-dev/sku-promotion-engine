@@ -8,14 +8,14 @@ namespace PromotionEngine.Cart
 {
     public class CartItem
     {
-        public CartItem(Product product, int unit)
+        public CartItem(Product product, int quantity)
         {
             Product = product;
-            Unit = unit;
-            Price = unit * product.UnitPrice;
+            Quantity = quantity;
+            Price = quantity * product.UnitPrice;
         }
         public Product Product { get; set; }
-        public int Unit { get; set; }
+        public int Quantity { get; set; }
         public int Price {get;set;}
         public bool HasAppliedPromotion { get;set;}
     }

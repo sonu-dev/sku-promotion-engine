@@ -9,27 +9,23 @@ namespace PromotionEngine.Promotions
 {
     public class PromotionRulesManager
     {
-        private readonly IList<PromotionRule> _rules;
+        private readonly IList<PromotionRuleBase> _rules;
         public PromotionRulesManager()
         {
-            _rules = new List<PromotionRule>();
+            _rules = new List<PromotionRuleBase>();
         }
-        public void AddPromotionRule(PromotionRule rule)
+        public void AddPromotionRule(PromotionRuleBase rule)
         {
             if (_rules.Any(r => r.RuleName.Equals(rule.RuleName)))
             {
                 throw new InvalidOperationException($"Promotion Rule: {rule.RuleName} already exist.");
             }
             _rules.Add(rule);
-        }       
-
-        public List<PromotionRule> GetRules(bool isActive)
-        {
-            return _rules.Where(r => r.IsActive == isActive).ToList();
-        }
+        }     
+       
         public void ApplyPromotionRules(List<CartItem> items)
         {
-            var rules = GetRules(true);
+            var rules = _rules.Where(r => r.IsActive == true).ToList(); 
             rules.ForEach(rule => rule.Execute(items));
         }
     }

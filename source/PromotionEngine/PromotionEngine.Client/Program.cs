@@ -90,6 +90,7 @@ namespace PromotionEngine.Client
              */
             cartMgr.ClearCart();
             cartMgr.AddToCart(sku_A, 3);
+            cartMgr.AddToCart(sku_A, 2);
             cartMgr.AddToCart(sku_B, 5);
             cartMgr.AddToCart(sku_D, 1);         
             cartMgr.AddToCart(sku_E, 7);

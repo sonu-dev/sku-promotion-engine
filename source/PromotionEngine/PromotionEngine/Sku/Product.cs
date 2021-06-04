@@ -6,8 +6,6 @@ namespace PromotionEngine.Sku
 {
     public class Product
     {
-        private int _unitPrice;
-
         public Product(string name, int unitPrice) 
         {
             Name = name;

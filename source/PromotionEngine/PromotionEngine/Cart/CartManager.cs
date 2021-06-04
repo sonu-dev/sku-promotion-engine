@@ -20,11 +20,17 @@ namespace PromotionEngine.Cart
             _promotionRulesManager = promotionRulesManager;
         }
 
-        public void AddToCart(Product product, int unit)
+        public void AddToCart(Product product, int quantity)
         {
-            var item = new CartItem(product, unit);
-            CartItems.Add(item);
-            TotalPrice = TotalPrice + item.Price;
+            var cartItem = CartItems.FirstOrDefault(cI => product.Name.Equals(cI.Product.Name));
+            if (cartItem != null)
+            {
+                UpdateCartItem(cartItem, quantity);
+                return;
+            }
+            var newCartItem = new CartItem(product, quantity);
+            CartItems.Add(newCartItem);
+            TotalPrice = TotalPrice + newCartItem.Price;
         }       
 
         public void ApplyPromotions()
@@ -40,7 +46,7 @@ namespace PromotionEngine.Cart
                 }
                 else
                 {
-                    totalPrice = totalPrice + item.Unit * item.Product.UnitPrice;
+                    totalPrice = totalPrice + item.Quantity * item.Product.UnitPrice;
                 }
             });
             TotalPrice = totalPrice;
@@ -50,6 +56,12 @@ namespace PromotionEngine.Cart
         {
             CartItems.Clear();
             TotalPrice = 0;
+        }
+
+        private void UpdateCartItem(CartItem cartItem, int quantity)
+        {
+            cartItem.Quantity += quantity;
+            cartItem.Price = cartItem.Quantity * cartItem.Product.UnitPrice;
         }
     }
 }

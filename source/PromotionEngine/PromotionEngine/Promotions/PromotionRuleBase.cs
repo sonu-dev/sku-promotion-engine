@@ -7,9 +7,9 @@ using System.Text;
 
 namespace PromotionEngine.Promotions
 {
-    public abstract class PromotionRule
+    public abstract class PromotionRuleBase
     {
-        public PromotionRule(string ruleName, List<PromotionProduct> promotionProducts)
+        public PromotionRuleBase(string ruleName, List<PromotionProduct> promotionProducts)
         {
             RuleName = ruleName;
             PromotionProducts = promotionProducts;
@@ -21,9 +21,7 @@ namespace PromotionEngine.Promotions
         public string RuleName { get; set; }
         public string RuleDescription { get; set; }
         public List<PromotionProduct> PromotionProducts { get; set; }
-        public bool IsActive {get;set;}
-
-        public bool HasAppliedPromotion { get; set; }
+        public bool IsActive {get;set;}      
         public virtual void Execute(List<CartItem> items)
         {
             if (items == null)
