@@ -33,10 +33,12 @@ namespace PromotionEngine.Promotions
 
             if (ValidatePromotionProducts(items))
             {
-                ApplyPromotion(items);
+                var ruleProductNames = PromotionProducts.Select(p => p.ProductName).ToList();
+                var ruleItems = items.Where(i => ruleProductNames.Contains(i.Product.Name)).ToList();
+                ApplyPromotions(ruleItems);
             }
         }
-        public abstract List<CartItem> ApplyPromotion(List<CartItem> items);
+        public abstract List<CartItem> ApplyPromotions(List<CartItem> ruleItems);
 
         #region Private Methods
         private bool ValidatePromotionProducts(List<CartItem> items)

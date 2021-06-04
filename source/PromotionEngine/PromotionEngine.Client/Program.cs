@@ -15,13 +15,15 @@ namespace PromotionEngine.Client
             const string B = "B";
             const string C = "C";
             const string D = "D";
+            const string E = "E";
 
             // Create Skus 
             var sku_A = new Product(A, 50);
             var sku_B = new Product(B, 30);
             var sku_C = new Product(C, 20);
             var sku_D = new Product(D, 15);
-            ConsoleHelper.DisplayProducts(new List<Product> { sku_A, sku_B, sku_C, sku_D });
+            var sku_E = new Product(E, 100);
+            ConsoleHelper.DisplayProducts(new List<Product> { sku_A, sku_B, sku_C, sku_D, sku_E });
 
             // Create Promotion Rules
             var promotionRulesManager = new PromotionRulesManager();
@@ -36,7 +38,10 @@ namespace PromotionEngine.Client
 
             // C & D for 30
             promotionRulesManager.AddPromotionRule(new FixedPricePromotionRule("CD", new List<PromotionProduct> { new PromotionProduct(C, 1), new PromotionProduct(D, 1) }, 30));
-            
+
+            // E for 10%
+            promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("E%100", new List<PromotionProduct> { new PromotionProduct(E, 2) }, 10));
+
             /* Scenario A
                         1 * A 50
                         1 * B 30
@@ -76,6 +81,20 @@ namespace PromotionEngine.Client
             cartMgr.AddToCart(sku_D, 1);
             cartMgr.ApplyPromotions();           
             ConsoleHelper.DisplayCart(cartMgr, "Scenario C");
+
+            /* Scenario D (Custom)
+                        3 * A 130
+                        5 * B 120
+                        1 * D 15
+                        7 * E 640
+             */
+            cartMgr.ClearCart();
+            cartMgr.AddToCart(sku_A, 3);
+            cartMgr.AddToCart(sku_B, 5);
+            cartMgr.AddToCart(sku_D, 1);         
+            cartMgr.AddToCart(sku_E, 7);
+            cartMgr.ApplyPromotions();
+            ConsoleHelper.DisplayCart(cartMgr, "Scenario D(Custom)");
 
             Console.ReadKey();
         }

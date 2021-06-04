@@ -15,9 +15,10 @@ namespace PromotionEngine.Test
         private readonly Product sku_B;
         private readonly Product sku_C;
         private readonly Product sku_D;
+        private readonly Product sku_E;
 
         public CartManagerTest()
-        {           
+        {
             _promotionRulesManager = new PromotionRulesManager();
             _cartManager = new CartManager(_promotionRulesManager);
 
@@ -26,6 +27,7 @@ namespace PromotionEngine.Test
             sku_B = new Product("B", 30);
             sku_C = new Product("C", 20);
             sku_D = new Product("D", 15);
+            sku_E = new Product("E", 100);
 
             // Create Promotion Rules
             // Add FixedPrice Promotion Rules
@@ -35,7 +37,9 @@ namespace PromotionEngine.Test
             _promotionRulesManager.AddPromotionRule(new FixedPricePromotionRule("2B", new List<PromotionProduct> { new PromotionProduct("B", 2) }, 45));
             // C & D for 30
             _promotionRulesManager.AddPromotionRule(new FixedPricePromotionRule("CD", new List<PromotionProduct> { new PromotionProduct("C", 1), new PromotionProduct("D", 1) }, 30));
-        }       
+            // E for 10%
+            _promotionRulesManager.AddPromotionRule(new PercentagePricePromotionRule("E%100", new List<PromotionProduct> { new PromotionProduct("E", 2) }, 10));
+        }
         /// <summary>
         /// Scenario A
         ///1 * A 50
@@ -51,7 +55,7 @@ namespace PromotionEngine.Test
             _cartManager.AddToCart(sku_B, 1);
             _cartManager.AddToCart(sku_C, 1);
 
-           // _cartManager.ApplyPromotions();
+            // _cartManager.ApplyPromotions();
             var totalPrice = _cartManager.TotalPrice;
             Assert.AreEqual(100, totalPrice);
         }
@@ -66,13 +70,12 @@ namespace PromotionEngine.Test
         [TestMethod]
         public void TestScenario_B()
         {
-            _cartManager.ClearCart();
-            _cartManager.ClearCart();
+            _cartManager.ClearCart();           
             _cartManager.AddToCart(sku_A, 5);
             _cartManager.AddToCart(sku_B, 5);
             _cartManager.AddToCart(sku_C, 1);
 
-            // _cartManager.ApplyPromotions();
+            _cartManager.ApplyPromotions();
             var totalPrice = _cartManager.TotalPrice;
             Assert.AreEqual(370, totalPrice);
         }
@@ -88,16 +91,37 @@ namespace PromotionEngine.Test
         [TestMethod]
         public void TestScenario_C()
         {
-            _cartManager.ClearCart();
-            _cartManager.ClearCart();
+            _cartManager.ClearCart();          
             _cartManager.AddToCart(sku_A, 3);
             _cartManager.AddToCart(sku_B, 5);
             _cartManager.AddToCart(sku_C, 1);
             _cartManager.AddToCart(sku_D, 1);
 
-            // _cartManager.ApplyPromotions();
+            _cartManager.ApplyPromotions();
             var totalPrice = _cartManager.TotalPrice;
             Assert.AreEqual(280, totalPrice);
+        }
+
+        /// <summary>
+        ///    Scenario D (Custom)
+        //1 * A 130
+        //1 * B 120
+        //1 * D 15
+        //7 * E 640
+        //Total 905
+        /// </summary>
+        [TestMethod]
+        public void TestScenario_D()
+        {
+            _cartManager.ClearCart();          
+            _cartManager.AddToCart(sku_A, 3);
+            _cartManager.AddToCart(sku_B, 5);
+            _cartManager.AddToCart(sku_D, 1);
+            _cartManager.AddToCart(sku_E, 7);
+
+            _cartManager.ApplyPromotions();
+            var totalPrice = _cartManager.TotalPrice;
+            Assert.AreEqual(905, totalPrice);
         }
     }
 }
