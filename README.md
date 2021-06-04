@@ -1,2 +1,2 @@
 # sku-promotion-engine
-It'a generic template to create promotions on SKU's.
+An idea to create generic promotions for SKU's.
